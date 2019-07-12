@@ -12,7 +12,7 @@ ENV XSRCTAR="xflr5_v${XVERSION}_src.tar.gz"
 WORKDIR /opt
 RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR} \
   && tar -xzvf ${XSRCTAR}
-RUN qmake /opt/xflr5 && make -j8
+RUN echo '#####'; pwd; ls; qmake /opt/xflr5 && make -j8
 
 RUN ls /opt/xflr5-engine/
 
