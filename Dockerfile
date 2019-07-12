@@ -23,8 +23,15 @@ RUN apt-get update && \
     libqt5xml5 \
     libgl1-mesa-glx
 
-COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.s* /usr/lib/
-COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.s* /usr/lib/
+COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
+COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
+COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
+
+COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so /usr/lib/
+COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1 /usr/lib/
+COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1.0 /usr/lib/
+COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1.0.0 /usr/lib/
+
 COPY --from=builder  /opt/xflr5/xflr5-gui/xflr5 /usr/bin
 RUN chmod ugo+x /usr/bin/xflr5
 
