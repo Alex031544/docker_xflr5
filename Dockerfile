@@ -1,4 +1,4 @@
-FROM darkmattercoder/qt-build:5.11.2 as install
+FROM darkmattercoder/qt-build:5.11.2 AS builder
 
 ARG SSL_KEYSTORE_PASSWORD
 USER root
@@ -22,17 +22,17 @@ RUN apt-get update && \
     libqt5xml5 \
     libgl1-mesa-glx
 
-COPY --from=install /opt/xflr5-engine/libxflr5-engine.so /usr/lib/
-COPY --from=install /opt/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
-COPY --from=install /opt/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
-COPY --from=install /opt/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
 
-COPY --from=install /opt/XFoil-lib/libXFoil.so /usr/lib/
-COPY --from=install /opt/XFoil-lib/libXFoil.so.1 /usr/lib/
-COPY --from=install /opt/XFoil-lib/libXFoil.so.1.0 /usr/lib/
-COPY --from=install /opt/XFoil-lib/libXFoil.so.1.0.0 /usr/lib/
+COPY --from=builder  /opt/XFoil-lib/libXFoil.so /usr/lib/
+COPY --from=builder  /opt/XFoil-lib/libXFoil.so.1 /usr/lib/
+COPY --from=builder  /opt/XFoil-lib/libXFoil.so.1.0 /usr/lib/
+COPY --from=builder  /opt/XFoil-lib/libXFoil.so.1.0.0 /usr/lib/
 
-COPY --from=install /opt/xflr5-gui/xflr5 /usr/bin
+COPY --from=builder  /opt/xflr5-gui/xflr5 /usr/bin
 RUN chmod ugo+x /usr/bin/xflr5
 
 VOLUME /xflr5
