@@ -1,0 +1,13 @@
+#!/bin/bash
+
+xhost +
+
+docker run \
+	-it \
+	--rm \
+	--env=LOCAL_USER_ID="$(id -u)" \
+	-e DISPLAY=unix$DISPLAY \
+	--device="/dev/video0:/dev/video0" \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+	-v ${PWD}:/xflr5 \
+	xflr5:test
