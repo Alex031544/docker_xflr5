@@ -1,0 +1,28 @@
+diff -crB xflr5/xflr5-engine/objects/objects3d/body.cpp xflr5_patch/xflr5-engine/objects/objects3d/body.cpp
+*** xflr5/xflr5-engine/objects/objects3d/body.cpp	2019-07-05 15:01:36.000000000 +0200
+--- xflr5_patch/xflr5-engine/objects/objects3d/body.cpp	2019-07-13 17:20:34.506132802 +0200
+***************
+*** 1774,1780 ****
+      int length = strong.length() * 1+2;//1 char takes one byte in the file ?
+  
+      int pos = in.pos();
+!     in.seek(pos-length);
+      Line--;
+      return true;
+  }
+--- 1774,1780 ----
+      int length = strong.length() * 1+2;//1 char takes one byte in the file ?
+  
+      int pos = in.pos();
+!     in.read(pos-length);
+      Line--;
+      return true;
+  }
+***************
+*** 2339,2343 ****
+  
+      Q_ASSERT(iTriangles==nTriangles);
+  }
+- 
+- 
+--- 2339,2341 ----
