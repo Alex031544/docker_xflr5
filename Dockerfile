@@ -11,21 +11,25 @@ ENV XSRCTAR="xflr5_v${XVERSION}_src.tar.gz"
 
 WORKDIR /opt
 RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR} \
-  && tar -xzvf ${XSRCTAR}
-RUN qmake /opt/xflr5 && make -j8
+  && tar -xzvf ${XSRCTAR} \
+  && mkdir build \
+  && cd build \
+  && qmake /opt/xflr5 \
+  && make -j8 \
+  && ls
 
 
 FROM debian:buster AS runtime
 
-RUN apt-get update && \
-  apt-get install -y \
+RUN apt-get update \
+  && apt-get install -y \
     libqt5opengl5 \
     libqt5xml5 \
     libgl1-mesa-glx
 
-COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
-COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
-COPY --from=builder  /opt/xflr5/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
+COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
 
 COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so /usr/lib/
 COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1 /usr/lib/
