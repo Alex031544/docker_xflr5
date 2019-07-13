@@ -19,6 +19,7 @@ WORKDIR /opt
 RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR}
 RUN tar -xzvf ${XSRCTAR}
 COPY xflr5.patch .
+RUN patch -p0 -i xflr5.patch
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
 RUN qmake /opt/xflr5
