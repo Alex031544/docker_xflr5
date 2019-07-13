@@ -13,7 +13,7 @@ WORKDIR /opt
 RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR}
 RUN tar -xzvf ${XSRCTAR}
 RUN mkdir -p /opt/build
-WORKDIR /xflr5 /opt/build
+WORKDIR /opt/build
 RUN qmake /opt/xflr5
 RUN make
 
