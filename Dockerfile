@@ -15,9 +15,7 @@ RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR} \
   && mkdir build \
   && cd build \
   && qmake /opt/xflr5 \
-  && make -j8 \
-  && ls
-
+  && make -j8
 
 FROM debian:buster AS runtime
 
@@ -27,16 +25,8 @@ RUN apt-get update \
     libqt5xml5 \
     libgl1-mesa-glx
 
-COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1 /usr/lib/
-COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0 /usr/lib/
-COPY --from=builder  /opt/xflr5-engine/libxflr5-engine.so.1.0.0 /usr/lib/
-
-COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so /usr/lib/
-COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1 /usr/lib/
-COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1.0 /usr/lib/
-COPY --from=builder  /opt/xflr5/XFoil-lib/libXFoil.so.1.0.0 /usr/lib/
-
-COPY --from=builder  /opt/xflr5/xflr5-gui/xflr5 /usr/bin
+COPY --from=builder  /opt/build/xflr5-engine/libxflr5-engine.s* /opt/build/XFoil-lib/libXFoil.s* /usr/lib/
+COPY --from=builder  /opt/build/xflr5-gui/xflr5 /usr/bin
 RUN chmod ugo+x /usr/bin/xflr5
 
 VOLUME /xflr5
