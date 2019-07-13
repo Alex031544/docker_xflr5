@@ -27,6 +27,6 @@ A ready to go run script is available with [xflr5](xflr5).
 
 # Tags available
 
-| XFLR5    | Qt       | underlaying OS    | Tags           |
-|:--------:|:---------|:------------------|:---------------|
-| 6.47     | 5.11.2   | Debian Buster     | 6.47; latest   |
+| XFLR5    | Qt       | underlaying OS     | Tags           |
+|:--------:|:---------|:-------------------|:---------------|
+| 6.47     | 5.11.2   | Debian Buster-Slim | 6.47; latest   |
