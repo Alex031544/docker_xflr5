@@ -9,13 +9,13 @@ RUN apt-get update \
 ENV XVERSION="6.47"
 ENV XSRCTAR="xflr5_v${XVERSION}_src.tar.gz"
 
-RUN cd /opt \
-  && wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR} \
-  && tar -xzvf ${XSRCTAR} \
-  && mkdir -p /opt/build
-RUN cd /opt/build \
-  && qmake /opt/xflr5 \
-  && make
+WORKDIR /opt
+RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR}
+RUN tar -xzvf ${XSRCTAR}
+RUN mkdir -p /opt/build
+WORKDIR /xflr5 /opt/build
+RUN qmake /opt/xflr5
+RUN make
 
 FROM debian:buster-slim AS runtime
 
