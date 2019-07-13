@@ -15,7 +15,7 @@ RUN tar -xzvf ${XSRCTAR}
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
 RUN qmake /opt/xflr5
-RUN make
+RUN make -j16
 
 FROM debian:buster-slim AS runtime
 
