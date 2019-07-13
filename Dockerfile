@@ -17,7 +17,7 @@ WORKDIR /opt/build
 RUN qmake /opt/xflr5
 RUN make
 
-FROM debian:buster AS runtime
+FROM debian:buster-slim AS runtime
 
 RUN apt-get update \
   && apt-get install -y \
