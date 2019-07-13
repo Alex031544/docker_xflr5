@@ -1,10 +1,16 @@
-FROM darkmattercoder/qt-build:5.11.2 AS builder
+FROM debian:buster-slim AS builder
 
 ARG SSL_KEYSTORE_PASSWORD
 USER root
 
 RUN apt-get update \
-  && apt-get install -y wget tar
+  && apt-get install -y \
+    wget \
+    tar \
+    patch \
+    qt5-default \
+    g++ \
+    make
 
 ENV XVERSION="6.47"
 ENV XSRCTAR="xflr5_v${XVERSION}_src.tar.gz"
@@ -13,7 +19,6 @@ WORKDIR /opt
 RUN wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR}
 RUN tar -xzvf ${XSRCTAR}
 COPY xflr5.patch .
-RUN patch -p0 -i xflr5.patch
 RUN cat xflr5/xflr5-engine/objects/objects3d/body.cpp
 RUN mkdir -p /opt/build
 WORKDIR /opt/build
