@@ -12,10 +12,10 @@ ENV XSRCTAR="xflr5_v${XVERSION}_src.tar.gz"
 RUN cd /opt \
   && wget https://sourceforge.net/projects/xflr5/files/${XVERSION}/${XSRCTAR} \
   && tar -xzvf ${XSRCTAR} \
-  && mkdir -p /opt/build \
-  && cd /opt/build \
+  && mkdir -p /opt/build
+RUN cd /opt/build \
   && qmake /opt/xflr5 \
-  && make -j16
+  && make
 
 FROM debian:buster-slim AS runtime
 
